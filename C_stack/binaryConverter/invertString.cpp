@@ -18,7 +18,7 @@ bool pilhaVazia(PilhaCh stack){
 	return isEmpty;
 }
 
-PilhaCh pushPilha(PilhaCh stack,unsigned char item){
+PilhaCh pushPilha(PilhaCh stack,int item){
 	if(stack.topo != MaxPilha - 1){
 		stack.Vetor[stack.topo] = item;
 		stack.topo ++;
@@ -37,6 +37,7 @@ PilhaCh popPilha(PilhaCh stack){
 
 PilhaCh esvaziarPilha(PilhaCh stack){
 	stack.topo = 0;
+	return stack;
 }
 
 PilhaCh inverterPilha(char str[]){
@@ -53,20 +54,30 @@ PilhaCh inverterPilha(char str[]){
 
 void mostrarPilha(PilhaCh stack){
 	PilhaCh temp = stack;
-	unsigned char item;
+    int item;
 	
 	while(temp.topo > sinal){
 		item = temp.Vetor[temp.topo-1];
-		printf("%c",item);
+		printf("%d",item);
 		temp  = popPilha(temp);
 	}
+}
+
+PilhaCh convertToBinary(int decNum){
+	PilhaCh binNum = criarPilha();
 	
+	while(decNum > 0){
+		int remainder = decNum % 2;
+		binNum = pushPilha(binNum,remainder);
+		decNum = decNum / 2;
+	}
+	
+	return binNum;
 }
 
 int main(){
-	char word[] = "HELLO WORLD";
-	PilhaCh invertedWord = inverterPilha(word);
-	mostrarPilha(invertedWord);
-	
+	int decNum = 88;
+	PilhaCh binaryStack = convertToBinary(decNum);
+	mostrarPilha(binaryStack);
 	return 0;
 }

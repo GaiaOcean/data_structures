@@ -5,12 +5,12 @@
 
 typedef struct{
 	int topo; //indicates how many items are there in the stack
-	unsigned char Vetor[MaxPilha];
+	int Vetor[MaxPilha];
 }PilhaCh;
 
 PilhaCh criarPilha();
 bool pilhaVazia(PilhaCh);
-PilhaCh pushPilha(PilhaCh,unsigned char);
+PilhaCh pushPilha(PilhaCh,int);
 PilhaCh popPilha(PilhaCh);
 PilhaCh esvaziarPilha(PilhaCh);
 PilhaCh inverterPilha(char[]);
