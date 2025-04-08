@@ -13,5 +13,5 @@ bool pilhaVazia(PilhaCh);
 PilhaCh pushPilha(PilhaCh,unsigned char);
 PilhaCh popPilha(PilhaCh);
 PilhaCh esvaziarPilha(PilhaCh);
-PilhaCh inverterPilha(char[]);
+PilhaCh inverterStr(char[]);
 void mostrarPilha(PilhaCh);
