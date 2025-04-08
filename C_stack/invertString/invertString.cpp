@@ -39,7 +39,7 @@ PilhaCh esvaziarPilha(PilhaCh stack){
 	stack.topo = 0;
 }
 
-PilhaCh inverterPilha(char str[]){
+PilhaCh inverterStr(char str[]){
 	PilhaCh invertedStr = criarPilha();
 	int len = strlen(str);
 	int i = 0;
@@ -47,7 +47,6 @@ PilhaCh inverterPilha(char str[]){
 		invertedStr = pushPilha(invertedStr,str[i]);
 		i++;
 	}
-	
 	return invertedStr;
 }
 
@@ -65,7 +64,7 @@ void mostrarPilha(PilhaCh stack){
 
 int main(){
 	char word[] = "HELLO WORLD";
-	PilhaCh invertedWord = inverterPilha(word);
+	PilhaCh invertedWord = inverterStr(word);
 	mostrarPilha(invertedWord);
 	
 	return 0;
