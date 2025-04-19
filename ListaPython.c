@@ -46,7 +46,7 @@ int main() {
 
 str acessarF(Lista* original,Lista*sublista,int p, int q){
 	int i;
-	str mensagem = SUCESSO;
+	str mensagem;
 	
 	if(p < 0 && q < 0){
 		if(p < q ){
@@ -57,8 +57,8 @@ str acessarF(Lista* original,Lista*sublista,int p, int q){
 			q = original->tam + q;
 			
 			for(i = p; i < q; i++){
-					sublista->vetor[sublista->tam] = original->vetor[i];
-					sublista -> tam++;
+				sublista->vetor[sublista->tam] = original->vetor[i];
+				sublista -> tam++;
 			}
 		}
 	}else if(p >= 0 && q < 0){
@@ -83,6 +83,8 @@ str acessarF(Lista* original,Lista*sublista,int p, int q){
 	}
 	if(sublista->tam == 0){
 		mensagem = ERRO2;
+	}else{
+		mensagem = SUCESSO;
 	}
 	return mensagem;
 }
