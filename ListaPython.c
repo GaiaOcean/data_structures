@@ -18,21 +18,75 @@ Lista* newLista();
 Lista* construirLista(int);
 void mostrarLista(Lista*);
 str popLista(Lista*,int);
+str acessarF(Lista*,Lista*,int, int);
 
 int main() {
-	Lista* l = construirLista(5);
+	Lista* l = construirLista(9);
+	Lista * sublista = newLista();
+	
+	str item_retirado;
+	
 	printf("Lista:\n");
 	mostrarLista(l);
 	
-	str item_retirado = popLista(l,-5);
+	item_retirado = popLista(l,-4);
+	
 	if(item_retirado == ERRO1 || item_retirado == ERRO2){
 		printf("%s\n",item_retirado);
 	}else{	
 		printf("%d\n",item_retirado);
 	}
+
 	mostrarLista(l);
+	printf("\n");
+	str retorno = acessarF(l,sublista,0,80);	
+	mostrarLista(sublista);
 	return 0;
 }
+
+str acessarF(Lista* original,Lista*sublista,int p, int q){
+	int i;
+	str mensagem = SUCESSO;
+	
+	if(p < 0 && q < 0){
+		if(p < q ){
+			p = original->tam + p;
+			if(p < 0){
+				p = 0;
+			}
+			q = original->tam + q;
+			
+			for(i = p; i < q; i++){
+					sublista->vetor[sublista->tam] = original->vetor[i];
+					sublista -> tam++;
+			}
+		}
+	}else if(p >= 0 && q < 0){
+		if(q*-1 < original->tam && p < original->tam){
+			q = original->tam + q;
+			for(i = p; i < q; i++){
+				sublista->vetor[sublista->tam] = original->vetor[i];
+			 	sublista -> tam++;
+			}
+		}
+	}else if(p >= 0 && q > 0){
+		if(p < q && p < original->tam){	
+			if(q > original -> tam){
+				q = original -> tam;
+			}
+			for(i = p; i < q; i++){
+				sublista->vetor[sublista->tam] = original->vetor[i];
+				sublista-> tam++;
+			}
+		}
+	
+	}
+	if(sublista->tam == 0){
+		mensagem = ERRO2;
+	}
+	return mensagem;
+}
+
 str popLista(Lista* l ,int pos) {
 	str item;
 	int i;
