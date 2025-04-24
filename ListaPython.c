@@ -220,7 +220,7 @@ void mostrarLista(Lista* l){
 }
  
 str indexLista(Lista* l, unsigned int item, int* pos){
-	str msg;
+	str msg =  "Item nao encontrado";
 	int i = 0;
 		
 	if(l -> tam == 0){
