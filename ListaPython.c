@@ -21,6 +21,9 @@ void mostrarLista(Lista*);
 str popLista(Lista*,int);
 str acessarF(Lista*,Lista*,int, int);
 str indexLista(Lista*,unsigned int, int*); 
+str acessar(Lista*, int , unsigned int*);
+Lista* copyLista(Lista*);
+
 
 int main() {
 
@@ -60,7 +63,15 @@ int main() {
 	} else {
 	    printf("%s\n", retorno);
 	}
+	int item = 0;
 	
+	retorno =  acessar(l, 3, &item);
+	
+	if (retorno == SUCESSO) {
+	    printf("%d\n", item);
+	} else {
+	    printf("%s\n", retorno);
+	}
 	return 0;
 
 }
@@ -241,49 +252,46 @@ str indexLista(Lista* l, unsigned int item, int* pos){
 	
 	return msg;
 }
-//str indexLista(int* lista, unsigned int tam, unsigned int index, int* status) {
-//
-//    static char erro[50];  // Para retornar mensagens constantes
-// 
-//    if (!lista) {
-//
-//        if (status) *status = -1;
-//
-//        strcpy(erro, ERRO3);
-//
-//        return erro;
-//
-//    }
-// 
-//    if (tam == 0) {
-//
-//        if (status) *status = -1;
-//
-//        strcpy(erro, ERRO2);
-//
-//        return erro;
-//
-//    }
-// 
-//    if (index >= tam) {
-//
-//        if (status) *status = -1;
-//
-//        strcpy(erro, ERRO1);
-//
-//        return erro;
-//
-//    }
-// 
-//    // Sucesso: Retorna a mensagem de sucesso
-//
-//    if (status) *status = 0;
-//
-//    strcpy(erro, SUCESSO);
-//
-//    return erro;
-//
-//}
-// 
-// 
+//se p for maior que a lista ou menor que zero
+str acessar(Lista* l, int pos, unsigned int* item){
+	str msg;
+	
+	if(l -> tam == 0){
+		msg = ERRO2;
+ 	}else if(pos >= 0 && pos < l -> tam ){
+ 		*item = l -> vetor[pos];
+ 		msg = SUCESSO;
+	}else{
+		msg = ERRO1;
+	}
+	
+	return msg;	
+}
+Lista* copyLista(Lista* l){
+
+	unsigned int i;
+
+	Lista* copiaLista;
+
+	copiaLista = malloc(sizeof(Lista));
+
+	copiaLista->tam = l->tam;
+
+	if(copiaLista->tam != 0){
+
+		for(i = 0; i < copiaLista->tam; i++){
+
+			copiaLista->vetor[i] = l->vetor[i];
+
+		}
+
+	} else {
+
+		printf("%s",ERRO2);
+
+	}
+
+	return copiaLista;
+
+}
  
