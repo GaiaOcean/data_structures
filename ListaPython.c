@@ -53,12 +53,12 @@ int main() {
 	
 	int pos = 0;
 	
-    indexLista(l,7,&pos);
+    retorno = indexLista(l,13,&pos);
     
 	if (retorno == SUCESSO) {
 	    printf("Item encontrado na posicao %d\n", pos);
 	} else {
-	    printf("Erro: %s\n", retorno);
+	    printf("%s\n", retorno);
 	}
 	
 	return 0;
@@ -185,20 +185,22 @@ Lista* newLista() {
 }
  
 Lista *construirLista(int n) {
-	
+	int i;
 	Lista *l;
-	l = (Lista *)malloc(sizeof(Lista));	
+	l = (Lista*)malloc(sizeof(Lista));	
 
 	l->tam = n;
 
-	for (int i=0;i < n;i++){
+	for (i=0;i < n;i++){
 	    l->vetor[i] = i;
 	}
+	
 	return l;
 }
  
 void mostrarLista(Lista* l){
-
+	int i;
+	
 	if (l==NULL||l->tam==0){
 
 		printf("%s\n", ERRO2);
@@ -209,7 +211,7 @@ void mostrarLista(Lista* l){
 
 	}
 
-	for (int i=0; i<l->tam; i++){
+	for (i=0; i<l->tam; i++){
 
 		printf("%u ", l->vetor[i]);
 
@@ -229,11 +231,11 @@ str indexLista(Lista* l, unsigned int item, int* pos){
 		while(i < l -> tam && item != l -> vetor[i]){
 			i++;
 		}	
-		if(i < l -> tam){
+		if(i < l -> tam ){
 		    *pos = i;
 			msg = SUCESSO;
 		}else{
-			msg =  = ERRO1;
+			msg = ERRO1;
 		}
 	}
 	
