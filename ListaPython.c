@@ -232,6 +232,8 @@ str indexLista(Lista* l, unsigned int item, int* pos){
 		if(i < l -> tam){
 		    *pos = i;
 			msg = SUCESSO;
+		}else{
+			msg =  = ERRO1;
 		}
 	}
 	
