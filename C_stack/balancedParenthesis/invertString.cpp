@@ -70,7 +70,7 @@ bool isBalanced(char str[]){
 	int i = 0;
 	bool balanced = true ;
 	
-	while(i < len && balanced != false ){
+	while(i < len && balanced ){
 		if(str[i] == '('){
 			stack = pushPilha(stack,str[i]);
 		}else if(str[i] == ')'){
