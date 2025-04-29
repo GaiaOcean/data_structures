@@ -65,7 +65,7 @@ int main() {
 	}
 	int item = 0;
 	
-	retorno =  acessar(l, 3, &item);
+	retorno =  acessar(l, -3, &item);
 	
 	if (retorno == SUCESSO) {
 	    printf("%d\n", item);
@@ -252,7 +252,7 @@ str indexLista(Lista* l, unsigned int item, int* pos){
 	
 	return msg;
 }
-//se p for maior que a lista ou menor que zero
+
 str acessar(Lista* l, int pos, unsigned int* item){
 	str msg;
 	
@@ -261,6 +261,10 @@ str acessar(Lista* l, int pos, unsigned int* item){
  	}else if(pos >= 0 && pos < l -> tam ){
  		*item = l -> vetor[pos];
  		msg = SUCESSO;
+	}else if(pos < 0){
+	 	pos = l -> tam + pos;
+	 	*item = l -> vetor[pos];
+	 	msg = SUCESSO;
 	}else{
 		msg = ERRO1;
 	}
