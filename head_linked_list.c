@@ -115,5 +115,55 @@ void destruirLista(Lista* l){
 }
 
 
+void mostrarLista(Lista* l){
+	Node* temp;
+	int element;
+	temp = l -> head;
+	
+	do{	
+		element = temp -> item;
+		printf("%d ", element);
+		temp = temp -> next;
+	}while(temp != NULL);
+} 
+
+//inverter lista
+Lista inverterLista(Lista *l){
+	Lista nova = criarLista();
+	Lista novaCopy = criarLista();
+	Node* temp = l -> head;
+	int elemento;
+	
+	while(temp != NULL){
+		elemento = temp -> item;
+		inserirLista(&nova,elemento);
+		temp = temp -> next;
+	}
+	
+	temp = nova.head;
+	
+	while(temp != NULL){
+		elemento = temp -> item;
+		inserirLista(&l, elemento);
+		temp = temp -> next;
+	}
+	
+	return nova;
+}
+//ordenar lista
 
 
+int main(){
+    Lista l = criarLista();
+    inserirLista(&l,10);
+    inserirLista(&l,30);
+    inserirLista(&l,15);
+    inserirLista(&l,12);
+    inserirLista(&l,90);
+    inserirLista(&l,8);
+    Lista nova = criarLista();
+    nova = inverterLista(&l);
+	mostrarLista(&l);
+	printf("\n");
+	mostrarLista(&nova);
+}
