@@ -127,8 +127,8 @@ void mostrarLista(Lista* l){
 	}while(temp != NULL);
 } 
 
-//inverter lista
-Lista inverterLista(Lista *l){
+//inverter lista ineficiente
+void inverterLista(Lista *l){
 	Lista nova = criarLista();
 	Lista novaCopy = criarLista();
 	Node* temp = l -> head;
@@ -139,18 +139,82 @@ Lista inverterLista(Lista *l){
 		inserirLista(&nova,elemento);
 		temp = temp -> next;
 	}
+	while(l -> head != NULL){
+		temp = l -> head;
+		l -> head = l -> head -> next;
+		free(temp); 
+	}
 	
 	temp = nova.head;
 	
 	while(temp != NULL){
 		elemento = temp -> item;
-		inserirLista(&l, elemento);
+		inserirLista(&novaCopy, elemento);
 		temp = temp -> next;
 	}
 	
-	return nova;
+	temp = novaCopy.head;
+	
+	while(temp != NULL){
+		elemento = temp -> item;
+		inserirLista(l,elemento);
+		temp = temp -> next;
+	}	
+	
 }
+
 //ordenar lista
+
+// Insere no início uma célula com o valor y somente se
+// esse valor não ocorre na lista.
+void buscaInsere ( Lista * l, int y){
+	Node* curr = l -> head;
+	
+	while(curr != NULL && curr -> item != y){
+		curr = curr -> next;
+	}
+	if(curr == NULL){
+		inserirLista(l,y);
+	}
+}
+
+
+// Remove a primeira ocorrência da célula que contém y
+void buscaRemove(Lista * l,int y){
+	Node* curr = l -> head;
+	Node* prev = NULL;
+	
+	while(curr != NULL && curr -> item != y){
+		prev = curr;
+		curr = curr -> next;
+	}
+	if(curr != NULL){
+		if(prev == NULL){
+			l -> head = curr -> next;
+		}else{
+	    	prev -> next = curr -> next;
+		}
+		free(curr);
+	}
+	
+}
+// Troca a posição das duas células. Suponha que as
+// referências sejam válidas, diferentes de NULL
+//void trocarCelulas ( Lista *, Celula *, Celula *){
+//	
+//}
+
+// Verifica se a lista está em ordem crescente. Suponha
+// que a lista não contenha duplicatas
+bool verificarCrescente (Lista l){
+	bool crescente = true;
+	if(l.head -> item > l.head -> next -> item){
+		crescente = false;
+	}
+	return crescente;
+}
+
+
 
 
 int main(){
@@ -162,8 +226,25 @@ int main(){
     inserirLista(&l,90);
     inserirLista(&l,8);
     Lista nova = criarLista();
-    nova = inverterLista(&l);
+    printf("Lista Original\n");
+    mostrarLista(&l);
+    printf("\n");
+    inverterLista(&l);
+    printf("Lista Invertida\n");
 	mostrarLista(&l);
 	printf("\n");
-	mostrarLista(&nova);
+	buscaRemove(&l,30);
+	mostrarLista(&l);
+	printf("\n");
+	buscaInsere(&l,190);
+	mostrarLista(&l);
+	printf("\n");
+	bool crescente = verificarCrescente(l);
+	if(crescente){
+		printf("Crescente");
+	}else{
+		printf("Descrescente");
+	}
+	return 0;
+	
 }
