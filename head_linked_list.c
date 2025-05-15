@@ -213,9 +213,23 @@ bool verificarCrescente (Lista l){
 	}
 	return crescente;
 }
-
-
-
+// Verifica se as duas listas contêm os mesmos
+// elementos, não importa a ordem. As listas não contêm
+// duplicata
+bool verificarIgual(Lista l1, Lista l2){
+	int size = l1.tam;
+	int array[size];
+	Node* temp = l1.head;
+	int i = 0;
+	
+	while(temp != NULL){//filling out the array
+		array[i] = temp -> item;
+		i++;
+		temp = temp -> next;
+	}
+	
+	
+}
 
 int main(){
     Lista l = criarLista();
