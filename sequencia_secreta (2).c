@@ -39,7 +39,7 @@ Pilha criarPilha(){
 
 void push(Pilha* stack, int item){
 	
-	if(stack->topo != MaxPilha){
+	if(stack->topo < MaxPilha){
 		stack->array[stack->topo] = item;
 		stack->topo++;
 	}
