@@ -65,11 +65,43 @@ int obterTamanho(Lista l){
 	
 	return tamanho;
 }
+
+Lista inserirOrdenada(Lista l, int item){
+	Celula *nova = malloc(sizeof(Celula));
+	nova -> elemento = item;
+	bool inseriu = false;
+	
+	if(l -> next != l){
+		Celula *prev = l;
+		Celula *curr = l -> next;
+		
+		do{
+			if( curr -> elemento >= item){
+				prev -> next = nova;
+				nova -> next = curr;
+				inseriu = true;
+			}
+			prev = curr;
+			curr = curr -> next;
+		}while( curr != l && !inseriu);
+		if(!inseriu){
+			nova -> next = l;
+			prev -> next = nova;	
+		}
+	}else{
+		nova -> next = l;
+		l -> next = nova;
+	}
+	return l;
+}
 int main(){
 	Lista l = criarLista();
 	l = inserir(l,3);
 	l = inserir(l,12);
 	l = inserir(l,92);
+	l = inserirOrdenada(l,4);
+	l = inserirOrdenada(l,100);
+	l = inserirOrdenada(l,99);
 	mostrarLista(l);
 	int size = obterTamanho(l);
 	printf("%d\n", size);
